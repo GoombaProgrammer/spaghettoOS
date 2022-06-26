@@ -1,0 +1,50 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net6.0</TargetFramework>
+        <Platform>cosmos</Platform>
+        <SupportsX86Intrinsics>false</SupportsX86Intrinsics>
+        <SelfContained>True</SelfContained>
+    </PropertyGroup>
+
+	<PropertyGroup>
+		<EnableGDB>False</EnableGDB>
+		<StartCosmosGDB>False</StartCosmosGDB>
+		<VisualStudioDebugPort>Pipe: Cosmos\Serial</VisualStudioDebugPort>
+		<CosmosDebugPort>Serial: COM1</CosmosDebugPort>
+		<Launch>VMware</Launch>
+		<Profile>VMware</Profile>
+		<Description>Use VMware Player or Workstation to deploy and debug.</Description>
+		<PxeInterface>192.168.0.8</PxeInterface>
+		<DebugEnabled>True</DebugEnabled>
+	</PropertyGroup>
+
+	<ItemGroup>
+	  <None Remove="Resources\Background.bmp" />
+	  <None Remove="Resources\Cursor.bmp" />
+	  <None Remove="Resources\GenericIcon.bmp" />
+	  <None Remove="Resources\inconsolata.regular.ttf" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <EmbeddedResource Include="Resources\Background.bmp" />
+	  <EmbeddedResource Include="Resources\Cursor.bmp" />
+	  <EmbeddedResource Include="Resources\GenericIcon.bmp" />
+	  <EmbeddedResource Include="Resources\inconsolata.regular.ttf" />
+	</ItemGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Cosmos.Build" Version="0-*" NoWarn="NU1604" />
+        <PackageReference Include="Cosmos.Debug.Kernel" Version="0-*" NoWarn="NU1604" />
+        <PackageReference Include="Cosmos.System2" Version="0-*" NoWarn="NU1604" />
+    </ItemGroup>
+	  
+	<ItemGroup>
+	  <PlugsReference Include="C:\Users\franc\source\repos\spaghettoOS\SpaghettoOSPlugs\bin\Debug\net6.0\SpaghettoOSPlugs.dll" />
+    </ItemGroup>
+	  
+	<ItemGroup>
+	  <ProjectReference Include="..\..\CosmosTTF\CosmosTTF\CosmosTTF.csproj" />
+	</ItemGroup>
+
+</Project>
