@@ -12,14 +12,15 @@ using System.Threading.Tasks;
  */
 namespace spaghettoOS.Utils {
     public class CustomDict<TK, TV> : IEnumerable where TK : IComparable {
-        private List<CustomDictEntry<TK, TV>> entries;
+        private List<CustomDictEntry<TK, TV>> entries = new();
         public int Count => entries.Count;
 
-        public CustomDict() {
-            entries = new();
-        }
-
         public void Add(TK key, TV value) {
+            if(key == null || value == null) {
+                Kernel.Instance.mDebugger.Send("key or value is null!");
+                return;
+            }
+
             entries.Add(new(key, value));
         }
 
@@ -56,6 +57,10 @@ namespace spaghettoOS.Utils {
             return false;
         }
 
+        public TV GetAt(int idx) {
+            return entries[idx].value;
+        }
+
         public void RemoveAt(int idx) {
             if (idx > entries.Count || idx < 0) throw new ArgumentOutOfRangeException("idx");
             entries.RemoveAt(idx);
@@ -75,20 +80,39 @@ namespace spaghettoOS.Utils {
             return -1;
         }
 
-        public bool TryGet(TK key, out TV val) {
+        public bool Contains(TK key) {
             foreach (var entry in entries) {
                 if (entry.key.CompareTo(key) == 0) {
-                    val = entry.value;
                     return true;
                 }
             }
 
+            return false;
+        }
+
+        public bool TryGet(TK key, out TV val) {
+            foreach (var entry in entries) {
+                if (entry.key.CompareTo(key) == 0) {
+                    Kernel.Instance.mDebugger.Send("Setting val");
+                    val = entry.value;
+                    return true;
+                } else {
+                    Kernel.Instance.mDebugger.Send("No sending val");
+                }
+            }
+
+
+            Kernel.Instance.mDebugger.Send("Defaulting val");
             val = default;
             return false;
         }
 
         public List<TV> AsValueList() {
             return (from entry in entries select entry.value).ToList();
+        }
+
+        public List<TK> AsKeyList() {
+            return (from entry in entries select entry.key).ToList();
         }
 
         public IEnumerator GetEnumerator() {

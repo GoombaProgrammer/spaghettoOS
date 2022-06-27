@@ -12,6 +12,7 @@ using System.IO;
 using Cosmos.System.Graphics;
 using Point = Cosmos.System.Graphics.Point;
 using spaghettoOS.Utils;
+using Cosmos.System;
 
 namespace spaghettoOS.Applications.Apps {
     public class DesktopApp : IApp {
@@ -57,11 +58,17 @@ namespace spaghettoOS.Applications.Apps {
                 newPictureBox.Image = Resources.ResourceManager.GenericIcon;
                 newPictureBox.WithAlpha = true;
                 newPictureBox.Form = form;
+                newPictureBox.OnMouseUp = (MouseState mb) => {
+                    TryOpen(file);
+                };
 
                 Label newLabel = new(new Point(offX, offY + 48));
                 newLabel.Text = fileName;
                 newLabel.FontSize = 12;
                 newLabel.Form = form;
+                newLabel.OnMouseUp = (MouseState mb) => {
+                    TryOpen(file);
+                };
 
                 form.formElements.Add(newPictureBox);
                 form.formElements.Add(newLabel);
@@ -74,11 +81,15 @@ namespace spaghettoOS.Applications.Apps {
                 }
             }
 
-            GraphicsManager.Instance.RegisterForm(form);
+            WindowManager.Instance.RegisterForm(form);
         }
 
         public void Update() {
             
+        }
+
+        public void TryOpen(string path) {
+            FileExtensionManager.TryLaunch(path);
         }
     }
 }

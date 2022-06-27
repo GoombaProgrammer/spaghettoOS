@@ -18,7 +18,7 @@ namespace spaghettoOS.Forms {
         public bool TitleBarEnabled { get; set; } = true;
         public bool BackgroundEnabled { get; set; } = true;
 
-        public List<IFormElement> formElements = new();
+        public List<FormElement> formElements = new();
 
         private Pen _titleBarPen = new Pen(Color.Gray, 1);
         private Pen _titleBarTextPen = new Pen(Color.Black, 1);
@@ -50,7 +50,7 @@ namespace spaghettoOS.Forms {
                 cv.DrawFilledRectangle(_generalPurposePen, this.Position.X, this.Position.Y + (TitleBarEnabled ? 20 : 0), this.Size.X, this.Size.Y);
             }
 
-            foreach(IFormElement element in formElements) {
+            foreach(FormElement element in formElements) {
                 element.Render(cv, this);
             }
         }

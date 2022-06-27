@@ -16,13 +16,13 @@ namespace spaghettoOS {
     public class Panic {
         public static void KernelPanic(string currentAction, Exception ex) {
             try {
-                GraphicsManager.Instance.cv.Clear(Color.Red);
-                GraphicsManager.Instance.cv.DrawString("***** KERNEL PANIC *****", PCScreenFont.Default, new Pen(Color.White), new Point(0, 0));
-                GraphicsManager.Instance.cv.DrawString("Current action: " + currentAction, PCScreenFont.Default, new Pen(Color.White), new Point(0, 16));
-                GraphicsManager.Instance.cv.DrawString("Exception message: " + ex.Message, PCScreenFont.Default, new Pen(Color.White), new Point(0, 32));
-                GraphicsManager.Instance.cv.DrawString("Press any key to shutdown SpaghettoOS", PCScreenFont.Default, new Pen(Color.White), new Point(0, 64));
+                WindowManager.Instance.cv.Clear(Color.Red);
+                WindowManager.Instance.cv.DrawString("***** KERNEL PANIC *****", PCScreenFont.Default, new Pen(Color.White), new Point(0, 0));
+                WindowManager.Instance.cv.DrawString("Current action: " + currentAction, PCScreenFont.Default, new Pen(Color.White), new Point(0, 16));
+                WindowManager.Instance.cv.DrawString("Exception message: " + ex.Message, PCScreenFont.Default, new Pen(Color.White), new Point(0, 32));
+                WindowManager.Instance.cv.DrawString("Press any key to shutdown SpaghettoOS", PCScreenFont.Default, new Pen(Color.White), new Point(0, 64));
 
-                GraphicsManager.Instance.cv.Display();
+                WindowManager.Instance.cv.Display();
 
                 Console.ReadKey();
                 Power.Shutdown();

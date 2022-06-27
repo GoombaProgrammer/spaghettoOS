@@ -45,7 +45,7 @@ namespace spaghettoOS.Applications.Apps {
             form.formElements.Add(labelDate);
             form.formElements.Add(labelFPS);
 
-            GraphicsManager.Instance.RegisterForm(form);
+            WindowManager.Instance.RegisterForm(form);
         }
 
         public void Update() {

@@ -1,17 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using Sys = Cosmos.System;
-using Cosmos.System.ScanMaps;
-using System.Collections;
-using System.Linq;
 using spaghettoOS.Graphics;
 using Cosmos.System.Graphics;
 using System.Drawing;
 using Point = Cosmos.System.Graphics.Point;
-using Cosmos.System.Graphics.Fonts;
 using Cosmos.HAL;
-using CosmosTTF;
 using spaghettoOS.Applications;
 using spaghettoOS.Applications.Apps;
 using spaghettoOS.Resources;
@@ -24,7 +17,7 @@ namespace spaghettoOS {
         public static Kernel Instance { get; set; }
         public Sys.FileSystem.CosmosVFS fs;
 
-        GraphicsManager graphics;
+        WindowManager graphics;
 
         // fps stuff
         int frameCounter = 0;
@@ -101,9 +94,9 @@ namespace spaghettoOS {
         }
 
         public static void DebugUIPrint(string txt, int offY = 0) {
-            GraphicsManager.Instance.cv.DrawFilledRectangle(new Pen(Color.Black), new Point(0, offY), 1000, 16);
-            GraphicsManager.Instance.cv.DrawString(txt, Sys.Graphics.Fonts.PCScreenFont.Default, new Pen(Color.White, 2), new Point(16, offY));
-            GraphicsManager.Instance.cv.Display();
+            WindowManager.Instance.cv.DrawFilledRectangle(new Pen(Color.Black), new Point(0, offY), 1000, 16);
+            WindowManager.Instance.cv.DrawString(txt, Sys.Graphics.Fonts.PCScreenFont.Default, new Pen(Color.White, 2), new Point(16, offY));
+            WindowManager.Instance.cv.Display();
         }
     }
 }

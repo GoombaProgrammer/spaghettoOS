@@ -9,9 +9,9 @@ using System.Threading.Tasks;
 using Point = Cosmos.System.Graphics.Point;
 
 namespace spaghettoOS.Forms.Elements {
-    public class PictureBox : IFormElement {
-        public string ID { get; set; }
-        public Form Form { get; set; }
+    public class PictureBox : FormElement {
+        public override string ID { get; set; }
+        public override Form Form { get; set; }
 
         public Point Position { get; set; }
         public Image Image { get; set; }
@@ -21,7 +21,7 @@ namespace spaghettoOS.Forms.Elements {
             this.Position = position;
         }
 
-        public void Render(Canvas cv, Form form) {
+        public override void Render(Canvas cv, Form form) {
             if (Image == null) return;
 
             Point finalPos = Form.Position.Add(Position);
@@ -31,6 +31,11 @@ namespace spaghettoOS.Forms.Elements {
             } else {
                 cv.DrawImage(Image, finalPos.X, finalPos.Y);
             }
+        }
+
+        public override Rect GetBounds() {
+            Point off = Form.Position.Add(Position);
+            return new Rect() { X = off.X, Y = off.Y, Width = (int)Image.Width, Height = (int)Image.Height };
         }
     }
 }

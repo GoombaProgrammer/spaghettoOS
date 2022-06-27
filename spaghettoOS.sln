@@ -9,7 +9,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SpaghettoOSPlugs", "Spaghet
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CosmosTTF", "..\CosmosTTF\CosmosTTF\CosmosTTF.csproj", "{A10F8310-FB48-4B87-9116-937D18C535B4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DesignProject", "DesignProject\DesignProject.csproj", "{307A14C8-E88E-4CCE-9DB8-9A1F98656E94}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DesignProject", "DesignProject\DesignProject.csproj", "{307A14C8-E88E-4CCE-9DB8-9A1F98656E94}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpalCompiler", "OpalCompiler\OpalCompiler.csproj", "{42900A97-8023-4C12-807E-42B9B1D63CB3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{307A14C8-E88E-4CCE-9DB8-9A1F98656E94}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{307A14C8-E88E-4CCE-9DB8-9A1F98656E94}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{307A14C8-E88E-4CCE-9DB8-9A1F98656E94}.Release|Any CPU.Build.0 = Release|Any CPU
+		{42900A97-8023-4C12-807E-42B9B1D63CB3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{42900A97-8023-4C12-807E-42B9B1D63CB3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{42900A97-8023-4C12-807E-42B9B1D63CB3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{42900A97-8023-4C12-807E-42B9B1D63CB3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
