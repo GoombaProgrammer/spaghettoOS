@@ -9,7 +9,7 @@ namespace spaghettoOS.Applications {
     public interface IApp {
         public abstract string Name { get; }
 
-        public virtual void OnStart(params object[] args) {
+        public virtual void OnStart(object[] args) {
 
         } 
 

@@ -28,9 +28,8 @@ namespace spaghettoOS {
             return (point.X, point.Y).IsInBounds(bounds);
         }
 
-        public static bool IsInBounds(this (int X, int Y) point, Rect bounds) {
-            return (point.X > bounds.X && point.X < bounds.X + bounds.Width &&
-                point.Y > bounds.Y && point.Y < bounds.Y + bounds.Height);
+        public static bool IsInBounds(this (int X, int Y) p, Rect r) {
+            return p.X > r.X && p.X < r.X+r.Width && p.Y > r.Y && p.Y < r.Y+r.Height;
         }
     }
 }

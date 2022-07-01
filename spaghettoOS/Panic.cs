@@ -24,9 +24,9 @@ namespace spaghettoOS {
 
                 WindowManager.Instance.cv.Display();
 
-                Console.ReadKey();
+                while(!KeyboardManager.KeyAvailable) {}
                 Power.Shutdown();
-            }catch(Exception ex2) {
+            } catch(Exception ex2) {
                 Kernel.Instance.mDebugger.SendMessageBox("Panic ironically caused an exception: " + ex2.Message + " | Panic caused by exception: " + ex.Message);
             }
         }

@@ -22,21 +22,21 @@ namespace spaghettoOS.Applications.Apps {
         Label labelDate;
         Label labelTime;
 
-        public void OnStart(params object[] args) {
+        public void OnStart(object[] args) {
             form = new("taskbar", Color.FromArgb(36, 36, 36), new Point(0, 720 - 40), new Point(1280, 40));
             form.TitleBarEnabled = false;
 
-            labelTime = new(new Point(10, 0));
+            labelTime = new("time", new Point(10, 0));
             labelTime.Text = "00:00";
             labelTime.FontSize = 15;
             labelTime.Form = form;
 
-            labelDate = new(new Point(10, 20));
+            labelDate = new("date", new Point(10, 20));
             labelDate.Text = "01/01/1970";
             labelDate.FontSize = 15;
             labelDate.Form = form;
 
-            labelFPS = new(new Point(1213, 9));
+            labelFPS = new("fps", new Point(1213, 9));
             labelFPS.Text = "FPS: 00";
             labelFPS.FontSize = 15;
             labelFPS.Form = form;

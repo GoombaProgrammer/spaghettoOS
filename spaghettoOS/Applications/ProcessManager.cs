@@ -15,7 +15,8 @@ namespace spaghettoOS.Applications {
         private static CustomDict<int, Process> processes = new();
         private static int pidCounter = 0;
 
-        public static void StartProcess(Process process, params object[] startParams) {
+        public static void StartProcess(Process process, object[] startParams = null) {
+            if (startParams == null) startParams = new object[] {};
             process.pid = pidCounter;
             process.app.OnStart(startParams);
             processes.Add(pidCounter, process);

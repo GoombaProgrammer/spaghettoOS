@@ -22,7 +22,7 @@ namespace spaghettoOS {
         // fps stuff
         int frameCounter = 0;
         int previousSecond = -1;
-        public int FramesPerSecond { get; set; } = 0;
+        public int FramesPerSecond { get; set; } = 0;  
 
         protected override void BeforeRun() {
             try {
@@ -36,6 +36,7 @@ namespace spaghettoOS {
                 MouseManager.ScreenHeight = 720;
 
                 Console.WriteLine("Initiliaze file system...");
+
                 fs = new Sys.FileSystem.CosmosVFS();
                 Sys.FileSystem.VFS.VFSManager.RegisterVFS(fs);
 

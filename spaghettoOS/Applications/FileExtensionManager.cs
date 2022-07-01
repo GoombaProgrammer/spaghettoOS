@@ -9,11 +9,11 @@ using System.Threading.Tasks;
 
 namespace spaghettoOS.Applications {
     public class FileExtensionManager {
-        public static CustomDict<string, Action<string>> Extensions = new() {
+        public static Dictionary<string, Action<string>> Extensions = new() {
             {".txt", (string path) => 
                 {
                     Kernel.Instance.mDebugger.Send("Launching notepad from txt ext");
-                    ProcessManager.StartProcess(new Process(new Notepad()), path);
+                    ProcessManager.StartProcess(new Process(new Notepad()), new object[] { path }); 
                 }
             }
         };
@@ -22,7 +22,7 @@ namespace spaghettoOS.Applications {
             string ext = Path.GetExtension(path);
             Kernel.Instance.mDebugger.Send("ext: " + ext);
 
-            if (Extensions.Contains(ext)) {
+            if (Extensions.ContainsKey(ext)) {
                 Kernel.Instance.mDebugger.Send("Extensions Dict has extension, getting it...");
                 var ExtMethod = Extensions[ext];
                 Kernel.Instance.mDebugger.Send("Got it! Trying to run method!");

@@ -51,6 +51,7 @@ namespace spaghettoOS.Graphics {
             cv.Clear(Color.Black);
 
             HandleInputs();
+
             foreach (Form form in registeredForms) {
                 form.Render(cv);
                 Cosmos.Core.Memory.Heap.Collect();
@@ -63,9 +64,12 @@ namespace spaghettoOS.Graphics {
         public FormElement FindElementAt(int x, int y) {
             FormElement currentElement = null;
 
-            foreach(Form form in registeredForms) {
+            foreach (Form form in registeredForms) {
                 foreach(FormElement el in form.formElements) {
-                    if ((x, y).IsInBounds(el.GetBounds())) currentElement = el;
+                    if ((x, y).IsInBounds(el.GetBounds())) {
+                        Kernel.Instance.mDebugger.Send(x.ToString() + " and " + y.ToString() + " is in bounds of el " + el.ID);
+                        currentElement = el;
+                    }
                 }
             }
 
@@ -82,6 +86,7 @@ namespace spaghettoOS.Graphics {
             var el = FindElementAt((int)MouseManager.X, (int)MouseManager.Y);
 
             if (el != null) el.OnMouseDownHandler(mb);
+            if (el != null) Kernel.Instance.mDebugger.Send("Setting focused element to " + el.ID); else Kernel.Instance.mDebugger.Send("Setting focused element to null");
             focusedElement = el;
         }
 
@@ -95,7 +100,10 @@ namespace spaghettoOS.Graphics {
         public void HandleInputs() {
             if(KeyboardManager.KeyAvailable) {
                 KeyboardManager.TryReadKey(out KeyEvent key);
-                if (focusedElement != null) focusedElement.OnKeyHandler(key);
+
+                if (focusedElement != null) {
+                    focusedElement.OnKeyHandler(key);
+                }
             }
 
             foreach(MouseState ms in mbDown.AsKeyList()) {
@@ -114,6 +122,7 @@ namespace spaghettoOS.Graphics {
         }
 
         public void RegisterForm(Form form) {
+            //Kernel.Instance.mDebugger.Send("Adding form with title " + form.Title);
             this.registeredForms.Add(form);
         }
 

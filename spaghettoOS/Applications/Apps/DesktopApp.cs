@@ -24,7 +24,7 @@ namespace spaghettoOS.Applications.Apps {
 
         public CustomDict<string, Image> icons = new();
 
-        public void OnStart(params object[] args) {
+        public void OnStart(object[] args) {
             if(!Directory.Exists("0:\\System\\Desktop")) {
                 Directory.CreateDirectory("0:\\System\\Desktop");
 
@@ -37,11 +37,13 @@ namespace spaghettoOS.Applications.Apps {
 
             }
 
+            File.WriteAllText("0:\\System\\Desktop\\real test.txt", "hello world 123");
+
             form = new("DesktopApp", Color.Black, new Point(0, 0), new Point(1280, 720));
             form.TitleBarEnabled = false;
             form.BackgroundEnabled = false;
 
-            pictureBox = new(new Point(0, 0));
+            pictureBox = new("bg", new Point(0, 0));
             pictureBox.Image = Resources.ResourceManager.BackgroundImage;
             pictureBox.Form = form;
 
@@ -50,24 +52,25 @@ namespace spaghettoOS.Applications.Apps {
             string[] files = Directory.GetFiles("0:\\System\\Desktop");
 
             int offX = 0, offY = 0;
+            int i = 0;
 
             foreach (string file in files) {
                 string fileName = Path.GetFileName(file);
 
-                PictureBox newPictureBox = new(new Point(offX, offY));
+                PictureBox newPictureBox = new("filePb" + i, new Point(offX, offY));
                 newPictureBox.Image = Resources.ResourceManager.GenericIcon;
                 newPictureBox.WithAlpha = true;
                 newPictureBox.Form = form;
                 newPictureBox.OnMouseUp = (MouseState mb) => {
-                    TryOpen(file);
+                    TryOpen("0:\\System\\Desktop\\" + file);
                 };
 
-                Label newLabel = new(new Point(offX, offY + 48));
+                Label newLabel = new("fileLbl" + i,new Point(offX, offY + 48));
                 newLabel.Text = fileName;
                 newLabel.FontSize = 12;
                 newLabel.Form = form;
                 newLabel.OnMouseUp = (MouseState mb) => {
-                    TryOpen(file);
+                    TryOpen("0:\\System\\Desktop\\" + file);
                 };
 
                 form.formElements.Add(newPictureBox);
@@ -79,6 +82,8 @@ namespace spaghettoOS.Applications.Apps {
                     offY = 0;
                     offX += 64;
                 }
+
+                i++;
             }
 
             WindowManager.Instance.RegisterForm(form);

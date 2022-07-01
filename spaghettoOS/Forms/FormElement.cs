@@ -29,6 +29,10 @@ namespace spaghettoOS.Forms {
         }
 
         public abstract Rect GetBounds();
+
+        public FormElement(string id) {
+            this.ID = id;
+        }
     }
 
     public struct Rect {

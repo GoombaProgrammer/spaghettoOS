@@ -17,7 +17,7 @@ namespace spaghettoOS.Forms.Elements {
         public Image Image { get; set; }
         public bool WithAlpha { get; set; } = false;
 
-        public PictureBox(Point position) {
+        public PictureBox(string id, Point position) : base(id) {
             this.Position = position;
         }
 

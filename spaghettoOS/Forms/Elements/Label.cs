@@ -20,7 +20,7 @@ namespace spaghettoOS.Forms.Elements {
         public string Text { get; set; } = "New label";
         public int FontSize { get; set; } = 16;
 
-        public Label(Point position) {
+        public Label(string id, Point position) : base(id) {
             this.Position = position;
         }
 

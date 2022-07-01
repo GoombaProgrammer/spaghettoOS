@@ -21,20 +21,33 @@ namespace spaghettoOS.Applications.Apps {
         private Form form;
         private TextBox textBox;
 
-        public CustomDict<string, Image> icons = new();
+        public void OnStart(object[] args) {
+            if(args.Length < 1) {
+                Kernel.Instance.mDebugger.Send("No path provided!");
+                // todo: show error alert
+                return;
+            }
 
-        public void OnStart(params object[] args) {
-            form = new("NotepadApp", Color.White, new Point(100, 100), new Point(500, 500));
-            form.TitleBarEnabled = true;
-            form.BackgroundEnabled = true;
+            try {
+                Kernel.Instance.mDebugger.Send("Starting notepad!!! yay!! Path: " + args[0]);
+                form = new("NotepadApp", Color.White, new Point(100, 100), new Point(500, 500));
+                form.TitleBarEnabled = true;
+                form.BackgroundEnabled = true;
 
-            textBox = new(new Point(0, 0), new Point(500, 500));
-            textBox.Text = File.ReadAllText((string)args[0]);
-            textBox.Form = form;
+                Kernel.Instance.mDebugger.Send("notepad!!! 1!!");
+                textBox = new("textBox", new Point(0, 0), new Point(500, 500));
+                textBox.Text = File.ReadAllText((string)args[0]);
+                textBox.ForegroundColor = Color.Black;
+                textBox.Form = form;
 
-            form.formElements.Add(textBox);
+                Kernel.Instance.mDebugger.Send("notepad!!! 2!!");
+                form.formElements.Add(textBox);
 
-            WindowManager.Instance.RegisterForm(form);
+                Kernel.Instance.mDebugger.Send("notepad!!! 3!!");
+                WindowManager.Instance.RegisterForm(form);
+            }catch(Exception e) {
+                Kernel.Instance.mDebugger.Send("Starting notepad app failed! Exception: " + e.Message);
+            }
         }
 
         public void Update() {
