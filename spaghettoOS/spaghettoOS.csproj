@@ -43,7 +43,7 @@
     </ItemGroup>
 	  
 	<ItemGroup>
-	  <PlugsReference Include="C:\Users\franc\source\repos\spaghettoOS\SpaghettoOSPlugs\bin\Debug\net6.0\SpaghettoOSPlugs.dll" />
+	  <PlugsReference Include="$(MSBuildProjectDirectory)\..\SpaghettoOSPlugs\bin\Debug\net6.0\SpaghettoOSPlugs.dll" />
     </ItemGroup>
 	  
 	<ItemGroup>
