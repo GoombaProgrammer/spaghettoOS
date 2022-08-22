@@ -42,7 +42,7 @@ namespace spaghettoOS.Forms {
         public void Render(Canvas cv) {
             if (TitleBarEnabled) {
                 cv.DrawFilledRectangle(_titleBarPen, this.Position, this.Size.X, 20);
-                cv.DrawStringTTF(_titleBarTextPen, Title, "default", 16, new Point(this.Position.X, this.Position.Y + 20));
+                cv.DrawStringTTF(_titleBarTextPen, Title, "default", 16, new Point(this.Position.X, this.Position.Y + 10));
             }
 
             if (BackgroundEnabled) {

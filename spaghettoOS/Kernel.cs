@@ -51,6 +51,8 @@ namespace spaghettoOS {
                 graphics.Initiliaze();
                 Console.WriteLine("Done!");
 
+                KeyboardManager.SetKeyLayout(new Sys.ScanMaps.DE_Standard());
+
             } catch (Exception ex) {
                 mDebugger.Send(ex.Message);
                 Panic.KernelPanic("KernelBeforeRun", ex);
@@ -61,6 +63,10 @@ namespace spaghettoOS {
             try {
                 ProcessManager.StartProcess(new Process(new DesktopApp()));
                 ProcessManager.StartProcess(new Process(new TaskbarApp()));
+
+                /*if (!File.Exists("0:\\System\\BasicConfig.cfg")) {
+                    ProcessManager.StartProcess(new Process(new FirstTimeSetup()));
+                }*/
 
                 while (true) {
                     Cosmos.Core.Memory.Heap.Collect();

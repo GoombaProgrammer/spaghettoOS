@@ -29,7 +29,13 @@ namespace spaghettoOS.Forms.Elements {
         }
 
         public override void Render(Canvas cv, Form form) {
-             cv.DrawStringTTF(foregroundPen, WordWrap(Text, Size.X), "default", FontSize, Position.Add(form.Position).Add(new Point(0, 2*FontSize)));
+            string[] lines = WordWrap(Text, Size.X).Split(Environment.NewLine);
+
+            int i = 0;
+            foreach(string line in lines) {
+                cv.DrawStringTTF(foregroundPen, line, "default", FontSize, Position.Add(form.Position).Add(new Point(0, (2+i) * FontSize)));
+                i++;
+            }
         }
 
         public override Rect GetBounds() {
@@ -42,7 +48,8 @@ namespace spaghettoOS.Forms.Elements {
             base.OnKeyHandler(ev);
 
             Kernel.Instance.mDebugger.Send("Adding key " + (int)ev.KeyChar);
-            if(ev.KeyChar != '\r') Text += ev.KeyChar;
+            if (ev.Key != ConsoleKeyEx.Enter && (ev.KeyChar < 32 || (ev.KeyChar >= 127 && ev.KeyChar < 160))) return; // Do not accept unicode control chars
+            Text += (ev.Key == ConsoleKeyEx.Enter ? Environment.NewLine : ev.KeyChar);
         }
 
         // Improved WordWrap algorithm by https://stackoverflow.com/a/17635/11877986
@@ -71,7 +78,7 @@ namespace spaghettoOS.Forms.Elements {
                         strBuilder.Append(word.Substring(0, width - 1) + "-");
                         word = word.Substring(width - 1);
 
-                        strBuilder.Append("\n");
+                        strBuilder.Append(Environment.NewLine);
                     }
 
                     // Remove leading whitespace from the word so the new line starts flush to the left.

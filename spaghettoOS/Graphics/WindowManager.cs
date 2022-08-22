@@ -49,7 +49,6 @@ namespace spaghettoOS.Graphics {
 
         public void RenderFrame() {
             cv.Clear(Color.Black);
-
             HandleInputs();
 
             foreach (Form form in registeredForms) {
