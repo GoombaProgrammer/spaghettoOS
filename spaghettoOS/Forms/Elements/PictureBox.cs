@@ -1,5 +1,6 @@
 ﻿using Cosmos.System.Graphics;
 using CosmosTTF;
+using spaghettoOS.Utils;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -14,8 +15,13 @@ namespace spaghettoOS.Forms.Elements {
         public override Form Form { get; set; }
 
         public Point Position { get; set; }
+        public Point Size { get; set; }
+
         public Image Image { get; set; }
         public bool WithAlpha { get; set; } = false;
+
+        private string cacheIdentifier = "";
+        private int[] resizeCache;
 
         public PictureBox(string id, Point position) : base(id) {
             this.Position = position;
@@ -26,10 +32,26 @@ namespace spaghettoOS.Forms.Elements {
 
             Point finalPos = Form.Position.Add(Position);
 
+            if (Size.X <= 0 || Size.Y <= 0) Size = new((int)Image.Width, (int)Image.Height);
+
+            if ((Size.X != Image.Width && Size.Y != Image.Height) && cacheIdentifier != Size.X.ToString() + Size.Y.ToString()) {
+                cacheIdentifier = Size.X.ToString() + Size.Y.ToString();
+                resizeCache = Utils.Utils.ScaleImage(Image, Size.X, Size.Y);
+            }
+
             if (WithAlpha) {
-                cv.DrawImageAlpha(Image, finalPos.X, finalPos.Y);
+                if (Size.X == Image.Width && Size.Y == Image.Height) {
+                    cv.DrawImageAlpha(Image, Position);
+                } else {
+                    cv.DrawImageFromIntArr(resizeCache, finalPos.X, finalPos.Y, Size.X, Size.Y);
+                }
+                cv.DrawImageFromIntArr(resizeCache, finalPos.X, finalPos.Y, Size.X, Size.Y);
             } else {
-                cv.DrawImage(Image, finalPos.X, finalPos.Y);
+                if (Size.X == Image.Width && Size.Y == Image.Height) {
+                    cv.DrawImage(Image, Position);
+                }else {
+                    cv.DrawImageFromIntArr(resizeCache, finalPos.X, finalPos.Y, Size.X, Size.Y);
+                }
             }
         }
 

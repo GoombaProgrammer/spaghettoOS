@@ -10,10 +10,16 @@ using System.Threading.Tasks;
 namespace spaghettoOS.Applications {
     public class FileExtensionManager {
         public static Dictionary<string, Action<string>> Extensions = new() {
-            {".txt", (string path) => 
+            {".txt", (string path) =>
                 {
                     Kernel.Instance.mDebugger.Send("Launching notepad from txt ext");
-                    ProcessManager.StartProcess(new Process(new Notepad()), new object[] { path }); 
+                    ProcessManager.StartProcess(new Process(new Notepad()), new object[] { path });
+                }
+            },
+            {".sbmp", (string path) =>
+                {
+                    Kernel.Instance.mDebugger.Send("Launching PhotoViewer from sbmp ext");
+                    ProcessManager.StartProcess(new Process(new Notepad()), new object[] { path });
                 }
             }
         };
